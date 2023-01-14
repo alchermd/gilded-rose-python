@@ -15,3 +15,10 @@ def test_update_quality_decrements_sell_in_for_items_that_arent_sulfuras():
     gilded_rose = GildedRose(items)
     gilded_rose.update_quality()
     assert items[0].sell_in == 4
+
+
+def test_aged_brie_increases_in_quality_the_older_it_gets():
+    items = [Item("Aged Brie", -1, 0)]
+    gilded_rose = GildedRose(items)
+    gilded_rose.update_quality()
+    assert items[0].quality == 2
