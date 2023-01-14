@@ -58,6 +58,7 @@ def test_quality_of_passes_becomes_zero_once_expired():
     gilded_rose.update_quality()
     assert items[0].quality == 0
 
+
 def test_quality_of_passes_increases_by_two_if_the_event_happens_in_10_days_or_less():
     items = [Item("Backstage passes to a TAFKAL80ETC concert", 10, 5)]
     gilded_rose = GildedRose(items)
@@ -70,3 +71,8 @@ def test_quality_of_passes_increases_by_three_if_the_event_happens_in_5_days_or_
     gilded_rose = GildedRose(items)
     gilded_rose.update_quality()
     assert items[0].quality == 8
+
+
+def test_item_string_representation():
+    item = Item("NORMAL-ITEM", 10, 5)
+    assert str(item) == "NORMAL-ITEM, 10, 5"
