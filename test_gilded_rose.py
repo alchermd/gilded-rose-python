@@ -76,3 +76,17 @@ def test_quality_of_passes_increases_by_three_if_the_event_happens_in_5_days_or_
 def test_item_string_representation():
     item = Item("NORMAL-ITEM", 10, 5)
     assert str(item) == "NORMAL-ITEM, 10, 5"
+
+
+def test_quality_of_items_never_go_negative():
+    items = [Item("NORMAL-ITEM", 5, 0)]
+    gilded_rose = GildedRose(items)
+    gilded_rose.update_quality()
+    assert items[0].quality == 0
+
+
+def test_quality_of_items_never_go_above_50():
+    items = [Item("Backstage passes to a TAFKAL80ETC concert", 5, 50)]
+    gilded_rose = GildedRose(items)
+    gilded_rose.update_quality()
+    assert items[0].quality == 50
