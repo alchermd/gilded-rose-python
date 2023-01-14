@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
 
+NORMAL_ITEM_NAME = "NORMAL-ITEM"
+BACKSTAGE_PASS_ITEM_NAME = "Backstage passes to a TAFKAL80ETC concert"
+AGED_BRIE_ITEM_NAME = "Aged Brie"
+LEGENDARY_ITEM_NAME = "Sulfuras, Hand of Ragnaros"
+
+
 class GildedRose(object):
 
     def __init__(self, items):
