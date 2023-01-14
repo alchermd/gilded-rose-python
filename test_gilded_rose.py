@@ -22,3 +22,10 @@ def test_aged_brie_increases_in_quality_the_older_it_gets():
     gilded_rose = GildedRose(items)
     gilded_rose.update_quality()
     assert items[0].quality == 2
+
+
+def test_item_quality_is_reduced():
+    items = [Item("NORMAL-ITEM", 5, 5)]
+    gilded_rose = GildedRose(items)
+    gilded_rose.update_quality()
+    assert items[0].quality == 4
