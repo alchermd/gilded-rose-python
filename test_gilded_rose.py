@@ -10,11 +10,18 @@ def test_foo():
     assert "foo" == items[0].name
 
 
-def test_update_quality_decrements_sell_in_for_items_that_arent_sulfuras():
-    items = [Item("NON-SULFURAS", 5, 0)]
+def test_sell_in_is_reduced():
+    items = [Item("NORMAL-ITEM", 5, 0)]
     gilded_rose = GildedRose(items)
     gilded_rose.update_quality()
     assert items[0].sell_in == 4
+
+
+def test_sell_in_is_not_reduced_for_legendary_items():
+    items = [Item("Sulfuras, Hand of Ragnaros", 5, 0)]
+    gilded_rose = GildedRose(items)
+    gilded_rose.update_quality()
+    assert items[0].sell_in == 5
 
 
 def test_aged_brie_increases_in_quality_the_older_it_gets():
