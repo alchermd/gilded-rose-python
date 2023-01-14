@@ -36,3 +36,24 @@ def test_item_quality_is_reduced():
     gilded_rose = GildedRose(items)
     gilded_rose.update_quality()
     assert items[0].quality == 4
+
+
+def test_quality_of_expired_items_gets_reduced():
+    items = [Item("NORMAL-ITEM", -1, 5)]
+    gilded_rose = GildedRose(items)
+    gilded_rose.update_quality()
+    assert items[0].quality == 3
+
+
+def test_quality_of_legendary_items_dont_get_reduced():
+    items = [Item("Sulfuras, Hand of Ragnaros", -1, 5)]
+    gilded_rose = GildedRose(items)
+    gilded_rose.update_quality()
+    assert items[0].quality == 5
+
+
+def test_quality_of_passes_becomes_zero_once_expired():
+    items = [Item("Backstage passes to a TAFKAL80ETC concert", -1, 5)]
+    gilded_rose = GildedRose(items)
+    gilded_rose.update_quality()
+    assert items[0].quality == 0
