@@ -4,11 +4,13 @@
 TAFKAL80ETC_CONCERT_PASS = "Backstage passes to a TAFKAL80ETC concert"
 AGED_BRIE_ITEM_NAME = "Aged Brie"
 SULFURAS = "Sulfuras, Hand of Ragnaros"
+CONJURED_ITEM = "CONJURED-ITEM"
 
 CONCERT_PASSES = [TAFKAL80ETC_CONCERT_PASS, AGED_BRIE_ITEM_NAME]
 REGULAR_CONCERT_PASSES = [TAFKAL80ETC_CONCERT_PASS]
 SPECIAL_CONCERT_PASSES = [AGED_BRIE_ITEM_NAME]
 LEGENDARY_ITEMS = [SULFURAS]
+CONJURED_ITEMS = [CONJURED_ITEM]
 
 MAX_ITEM_QUALITY = 50
 
@@ -29,6 +31,8 @@ def reduce_item_quality(item: "Item") -> "Item":
                     item.quality += 1
 
             item.quality = item.quality if item.quality < MAX_ITEM_QUALITY else MAX_ITEM_QUALITY
+    elif item.name in CONJURED_ITEMS:
+        item.quality = item.quality - 2
     elif quality_can_be_deducted(item):
         item.quality = item.quality - 1
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from typing import List
 
-from gilded_rose import Item, GildedRose, AGED_BRIE_ITEM_NAME, SULFURAS, TAFKAL80ETC_CONCERT_PASS
+from gilded_rose import Item, GildedRose, AGED_BRIE_ITEM_NAME, SULFURAS, TAFKAL80ETC_CONCERT_PASS, CONJURED_ITEM
 
 NORMAL_ITEM_NAME = "NORMAL-ITEM"
 
@@ -70,6 +70,11 @@ def test_quality_of_items_never_go_negative():
 def test_quality_of_items_never_go_above_50():
     items = update_quality([Item(TAFKAL80ETC_CONCERT_PASS, 5, 50)])
     assert items[0].quality == 50
+
+
+def test_conjured_items_degrade_twice_as_fast_as_normal_items():
+    items = update_quality([Item(CONJURED_ITEM, 5, 5)])
+    assert items[0].quality == 3
 
 
 def test_item_string_representation():
