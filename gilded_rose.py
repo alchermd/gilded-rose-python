@@ -1,23 +1,28 @@
 # -*- coding: utf-8 -*-
 
-NORMAL_ITEM_NAME = "NORMAL-ITEM"
-BACKSTAGE_PASS_ITEM_NAME = "Backstage passes to a TAFKAL80ETC concert"
+
+TAFKAL80ETC_CONCERT_PASS = "Backstage passes to a TAFKAL80ETC concert"
 AGED_BRIE_ITEM_NAME = "Aged Brie"
-LEGENDARY_ITEM_NAME = "Sulfuras, Hand of Ragnaros"
-PASS_ITEMS = [BACKSTAGE_PASS_ITEM_NAME, AGED_BRIE_ITEM_NAME]
+SULFURAS = "Sulfuras, Hand of Ragnaros"
+
+CONCERT_PASSES = [TAFKAL80ETC_CONCERT_PASS, AGED_BRIE_ITEM_NAME]
+REGULAR_CONCERT_PASSES = [TAFKAL80ETC_CONCERT_PASS]
+SPECIAL_CONCERT_PASSES = [AGED_BRIE_ITEM_NAME]
+LEGENDARY_ITEMS = [SULFURAS]
+
 MAX_ITEM_QUALITY = 50
 
 
 def quality_can_be_deducted(item: "Item") -> bool:
-    return item.quality > 0 and item.name != LEGENDARY_ITEM_NAME
+    return item.quality > 0 and item.name not in LEGENDARY_ITEMS
 
 
 def reduce_item_quality(item: "Item") -> "Item":
-    if item.name in PASS_ITEMS:
+    if item.name in CONCERT_PASSES:
         if item.quality < MAX_ITEM_QUALITY:
             item.quality += 1
 
-            if item.name == BACKSTAGE_PASS_ITEM_NAME:
+            if item.name in REGULAR_CONCERT_PASSES:
                 if item.sell_in < 11:
                     item.quality += 1
                 if item.sell_in < 6:
@@ -31,7 +36,7 @@ def reduce_item_quality(item: "Item") -> "Item":
 
 
 def reduce_item_sell_in(item: "Item") -> "Item":
-    if item.name != LEGENDARY_ITEM_NAME:
+    if item.name not in LEGENDARY_ITEMS:
         item.sell_in = item.sell_in - 1
 
     return item
@@ -41,7 +46,7 @@ def update_quality_for_expired_item(item: "Item") -> "Item":
     if item.name == AGED_BRIE_ITEM_NAME:
         if item.quality < MAX_ITEM_QUALITY:
             item.quality = item.quality + 1
-    elif item.name != BACKSTAGE_PASS_ITEM_NAME:
+    elif item.name not in REGULAR_CONCERT_PASSES:
         if quality_can_be_deducted(item):
             item.quality = item.quality - 1
     else:
