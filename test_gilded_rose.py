@@ -12,11 +12,6 @@ def update_quality(items: List[Item]) -> List[Item]:
     return items
 
 
-def test_foo():
-    items = update_quality([Item("foo", 0, 0)])
-    assert "foo" == items[0].name
-
-
 def test_sell_in_is_reduced():
     items = update_quality([Item(NORMAL_ITEM_NAME, 5, 0)])
     assert items[0].sell_in == 4
